@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 class ProjectSeeder extends Seeder
@@ -12,16 +13,19 @@ class ProjectSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(Faker $faker): void
     {
-        $project = new Project();
 
-        $project->title = 'Comics Database Prova';
-        $project->slug = Str::slug($project->title);
-        $project->description = 'applicativo web per mostrare un elenco di fumetti';
-        $project->link = 'https://github.com/MattiaBologna/laravel-dc-comics.git';
+        for ($i = 0; $i < 10; $i++) {
 
-        $project->save();
+            $project = new Project();
 
+            $project->title = $faker->sentence(6);
+            $project->slug = Str::slug($project->title);
+            $project->description = $faker->text(50);
+            $project->link = 'https://github.com/MattiaBologna/laravel-dc-comics.git';
+
+            $project->save();
+        }
     }
 }
