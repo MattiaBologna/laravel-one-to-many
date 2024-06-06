@@ -7,11 +7,14 @@
 <main>
     <section>
         <div class="container">
-            <h2>Project: {{$project->title}}</h2>
+            <h2>{{$project->title}}</h2>
         </div>
         <div class="container">
-            <p>{{$project->description}}</p>
-            <p>{{$project->link}}</p>
+            <p><strong>Description: </strong>{{$project->description}}</p>
+            @if ($project->type)
+                <p><strong>Type: </strong>{{$project->type ? $project->type->name : ''}}</p>
+            @endif
+            <p><strong>Github link: </strong>{{$project->link}}</p>
         </div>
     </section>
 </main>

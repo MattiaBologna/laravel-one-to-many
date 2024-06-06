@@ -17,6 +17,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Type</th>
                     <th>Description</th>
                     <th>Slug</th>
                 </tr>
@@ -26,6 +27,7 @@
                     <tr>
                         <td>{{$project->id}}</td>
                         <td><a href="{{route('admin.projects.show', $project)}}">{{$project->title}}</a></td>
+                        <td>{{$project->type ? $project->type->name : ''}}</td>
                         <td><a href="{{$project->link}}" target='_blank'>Github link</a></td>
                         <td>{{$project->slug}}</td>
                     </tr>
