@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -35,7 +36,24 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // recuperare i parametri dal form
+        $form_data = $request->all();
+
+        // creiamo l'istanza 
+        $new_project = new Project();
+
+        // popoliamo l'istanza con i dati che arrivano dal form
+        $new_project->title = $form_data['title'];
+        $new_project->slug = Str::slug($new_project->title);
+        $new_project->description = $form_data['description'];
+        $new_project->type_id = $form_data['type_id'];
+        $new_project->link = $form_data['link'];
+
+        // salviamo l'istanza 
+        $new_project->save();
+
+        // return to_route('admin.projects.show', $new_project);
+        return redirect()->route('admin.projects.show', $new_project);
     }
 
     /**

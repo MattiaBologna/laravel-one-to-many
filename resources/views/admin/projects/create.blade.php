@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container mt-3">
-    <form action="{{route('admin.projects.store')}}" method="post"> 
+    <form action="{{route('admin.projects.store')}}" method="POST"> 
         @csrf
     
         <div>
