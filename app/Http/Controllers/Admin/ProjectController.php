@@ -42,6 +42,9 @@ class ProjectController extends Controller
         // creiamo l'istanza 
         $new_project = new Project();
 
+        // SHORTCUT
+        // $new_project = Project::create($form_data);
+
         // popoliamo l'istanza con i dati che arrivano dal form
         $new_project->title = $form_data['title'];
         $new_project->slug = Str::slug($new_project->title);
@@ -70,7 +73,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -78,7 +81,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $form_data = $request->all();
+
+        $project->fill($form_data);
+
+        $project->save();
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -86,6 +94,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index');
     }
 }
